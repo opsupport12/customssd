@@ -1,0 +1,19 @@
+# render.yaml — Deploy PlayBeat backend on Render (repo root)
+# Placing this at the repository root ensures Render picks up the blueprint.
+services:
+  - type: web
+    name: playbeat-backend
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm --prefix playbeat-backend install --silent
+    startCommand: node playbeat-backend/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Set sensitive env vars in the Render Dashboard or via API:
+      # MONGODB_URI, JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD, STRIPE_SECRET_KEY,
+      # STRIPE_WEBHOOK_SECRET, STRIPE_PUBLIC_KEY, ALLOWED_ORIGINS, etc.
