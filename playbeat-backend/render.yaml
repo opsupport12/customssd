@@ -1,0 +1,25 @@
+# render.yaml — Deploy PlayBeat backend on Render
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: playbeat-backend
+    runtime: node
+    plan: free        # change to 'starter' for always-on
+    region: oregon    # or frankfurt, singapore
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Set the rest in Render Dashboard → Environment:
+      # MONGODB_URI, JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD,
+      # STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PUBLIC_KEY,
+      # JAZZCASH_MERCHANT_ID, JAZZCASH_PASSWORD, JAZZCASH_HASH_KEY,
+      # EASYPAISA_STORE_ID, EASYPAISA_HASH_KEY,
+      # ALFALAH_USERNAME, ALFALAH_PASSWORD, ALFALAH_HASH_KEY1, ALFALAH_HASH_KEY2,
+      # MEEZAN_USERNAME, MEEZAN_PASSWORD,
+      # ALLOWED_ORIGINS
