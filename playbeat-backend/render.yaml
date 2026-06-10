@@ -7,8 +7,8 @@ services:
     runtime: node
     plan: free        # change to 'starter' for always-on
     region: oregon    # or frankfurt, singapore
-    buildCommand: npm install
-    startCommand: npm start
+    buildCommand: cd playbeat-backend && npm install
+    startCommand: cd playbeat-backend && npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
